@@ -73,3 +73,16 @@ The bottom dock contains a quick-entry command prompt:
 - **`[Input text name]` + Enter**: Creates a new project workspace and triggers agent analysis.
 - **`/idea [content]`**: Adds a new raw text node directly to the universal inbox tracker.
 - **`Alt+Enter`**: Instantly submits commands to the background cognitive coordinator.
+
+---
+
+## 💡 Inspiration Lab
+
+To showcase the capabilities of the local multi-agent research, planning, and simulation pipelines, we have pre-packaged four dynamic innovation templates in the sidebar **Inspiration Lab**:
+1. **🧬 BioMemory Lattice**: Translates structured journal files into DNA-sequence base codings (A, T, C, G) for synthetic nucleotide storage.
+2. **☀️ EcoMesh Swarm Router**: An adaptive IoT mesh network that coordinates battery/solar levels of environmental sensors.
+3. **📜 Patent IP-Graph**: Auto-drafts USPTO compliance details from voice/text notes and notarizes state-hashes on L2/EVM testnets.
+4. **📐 Holographic Room Planner**: Parametric Three.js layout generator optimizing spatial and ergonomic boundaries.
+
+When seeded, the cognitive agents (Researcher, Architect, Planner, and Business Advisor) automatically mock detailed technical architectures, database schemas, prioritized epic checklists, and financial Monte Carlo simulations customized for that specific domain.
+

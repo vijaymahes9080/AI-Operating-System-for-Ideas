@@ -2,7 +2,7 @@
 import json
 import logging
 from app.config import settings
-from app.agents.roles import AGENT_SYSTEM_PROMPTS, MOCK_RESPONSES
+from app.agents.roles import AGENT_SYSTEM_PROMPTS, MOCK_RESPONSES, get_mock_response
 
 # Conditional LiteLLM imports to prevent crash if not pre-installed
 try:
@@ -27,7 +27,7 @@ class MultiAgentOrchestrator:
         # 1. Fallback to mock logic if active or litellm missing
         if self.enable_mock or not litellm:
             logger.info("Mock Mode active. Returning predefined schema response.")
-            return MOCK_RESPONSES.get(role, {"message": "Empty response"})
+            return get_mock_response(role, context_prompt)
             
         # 2. Call real LLM using LiteLLM
         system_instruction = AGENT_SYSTEM_PROMPTS[role]

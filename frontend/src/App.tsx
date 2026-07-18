@@ -123,6 +123,52 @@ export default function App() {
             </form>
           </div>
 
+          {/* Inspiration Lab */}
+          <div className="p-4 border-b border-borderFrost bg-white/[0.01]">
+            <div className="flex items-center justify-between mb-2.5">
+              <h2 className="text-xs uppercase text-slate-400 font-mono tracking-wider">Inspiration Lab</h2>
+              <Lightbulb className="w-3.5 h-3.5 text-accentCyan animate-pulse" />
+            </div>
+            <div className="flex flex-col gap-1.5 text-[10px]">
+              <button
+                onClick={() => {
+                  setNewProjName("BioMemory Lattice");
+                  setNewProjDesc("A local-first system that encodes structured journal notes into binary DNA base nucleotide sequences (A, T, C, G) for long-term cold storage simulation.");
+                }}
+                className="px-2.5 py-1.5 rounded border border-white/5 bg-white/5 hover:border-accentCyan/30 hover:bg-white/10 text-slate-300 text-left transition truncate"
+              >
+                🧬 BioMemory Lattice
+              </button>
+              <button
+                onClick={() => {
+                  setNewProjName("EcoMesh Swarm Router");
+                  setNewProjDesc("Solar-powered IoT weather sensor routing mesh that optimizes network paths dynamically using sunlight levels and localized SQLite-vec vector buffers.");
+                }}
+                className="px-2.5 py-1.5 rounded border border-white/5 bg-white/5 hover:border-accentCyan/30 hover:bg-white/10 text-slate-300 text-left transition truncate"
+              >
+                ☀️ EcoMesh Swarm Router
+              </button>
+              <button
+                onClick={() => {
+                  setNewProjName("Patent IP-Graph");
+                  setNewProjDesc("Generates USPTO patent drafts from structured markdown files and publishes state-hash notarizations on decentralized EVM testnets.");
+                }}
+                className="px-2.5 py-1.5 rounded border border-white/5 bg-white/5 hover:border-accentCyan/30 hover:bg-white/10 text-slate-300 text-left transition truncate"
+              >
+                📜 Patent IP-Graph
+              </button>
+              <button
+                onClick={() => {
+                  setNewProjName("Holographic Room Planner");
+                  setNewProjDesc("Optimizes ergonomic workspace setups and custom furniture placement, generating parametric Three.js visual assets and GLTF spatial data.");
+                }}
+                className="px-2.5 py-1.5 rounded border border-white/5 bg-white/5 hover:border-accentCyan/30 hover:bg-white/10 text-slate-300 text-left transition truncate"
+              >
+                📐 Holographic Room Planner
+              </button>
+            </div>
+          </div>
+
           {/* Projects List */}
           <div className="p-4">
             <h2 className="text-xs uppercase text-slate-400 font-mono tracking-wider mb-2">Workspace Organisms</h2>

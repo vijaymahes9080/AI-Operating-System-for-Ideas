@@ -7,6 +7,7 @@ import uuid
 from app.db.session import get_connection
 from app.graph.client import graph_client
 from app.agents.orchestrator import agent_orchestrator
+from app.agents.roles import get_mock_response
 
 logger = logging.getLogger("orchestrator_queue")
 
@@ -173,26 +174,49 @@ class LocalQueueWorker:
                 
             elif event_type == "BUILD_CODE":
                 await asyncio.sleep(4)
-                # Scaffold simulated tasks in database
-                tasks_data = [
-                    ("Init virtualenv", "Setting up local python packages", "DONE"),
-                    ("Design DB tables", "Creating projects, tasks SQL statements", "DONE"),
-                    ("Write FastAPI main", "Adding GET, POST app routes", "IN_PROGRESS"),
-                    ("Setup React Graph Component", "D3 force node UI widget", "TODO")
-                ]
+                # Scaffold simulated tasks in database based on project info
+                cursor.execute("SELECT name, description FROM projects WHERE id = ?", (project_id,))
+                p_row = cursor.fetchone()
+                p_name = p_row["name"] if p_row else ""
+                p_desc = p_row["description"] if p_row else ""
                 
-                for title, desc, t_status in tasks_data:
+                # Retrieve dynamic planner mock data
+                planner_data = get_mock_response("planner", f"{p_name} {p_desc}")
+                tasks_list = planner_data.get("tasks", [])
+                
+                # If no tasks returned, fall back to standard list
+                if not tasks_list:
+                    tasks_list = [
+                        {"title": "Init virtualenv", "description": "Setting up local python packages", "priority": "HIGH", "estimated_hours": 1.0},
+                        {"title": "Design DB tables", "description": "Creating projects, tasks SQL statements", "priority": "HIGH", "estimated_hours": 3.0},
+                        {"title": "Write FastAPI main", "description": "Adding GET, POST app routes", "priority": "MEDIUM", "estimated_hours": 4.5},
+                        {"title": "Setup React Graph Component", "description": "D3 force node UI widget", "priority": "MEDIUM", "estimated_hours": 3.0}
+                    ]
+                
+                for idx, task in enumerate(tasks_list):
+                    t_title = task.get("title", f"Task {idx}")
+                    t_desc = task.get("description", "Auto-generated task by planner agent.")
+                    t_priority = task.get("priority", "MEDIUM")
+                    t_est = task.get("estimated_hours", 3.0)
+                    
+                    if idx == 0:
+                        t_status = "DONE"
+                    elif idx == 1:
+                        t_status = "IN_PROGRESS"
+                    else:
+                        t_status = "TODO"
+                        
                     t_id = f"task_{uuid.uuid4().hex[:6]}"
                     cursor.execute(
                         """INSERT INTO tasks 
                            (id, project_id, title, description, status, priority, estimated_hours) 
-                           VALUES (?, ?, ?, ?, ?, 'HIGH', 3.0)""",
-                        (t_id, project_id, title, desc, t_status)
+                           VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                        (t_id, project_id, t_title, t_desc, t_status, t_priority, t_est)
                     )
                     # Add task node to Graph
                     graph_client.add_node(t_id, "Task", {
                         "project_id": project_id,
-                        "title": title,
+                        "title": t_title,
                         "status": t_status
                     })
                     graph_client.add_edge(project_id, t_id, "HAS_TASK")
