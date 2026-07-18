@@ -10,7 +10,7 @@ if (-not (Test-Path ".venv")) {
 # Activate and install dependencies
 Write-Host "Installing backend dependency modules..." -ForegroundColor Gray
 & .venv\Scripts\pip.exe install --upgrade pip
-& .venv\Scripts\pip.exe install -e backend --use-pep517
+& .venv\Scripts\pip.exe install -e backend --prefer-binary --use-pep517
 
 # 2. Setup Node frontend
 Write-Host "Installing React Node modules..." -ForegroundColor Gray
