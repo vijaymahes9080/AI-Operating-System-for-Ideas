@@ -2,12 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { 
   useWorkspaceStore, 
-  Project, 
-  Task, 
-  Decision 
+  Task
 } from './store/workspaceStore';
 import { 
-  Layers, 
   Compass, 
   FolderPlus, 
   Play, 
@@ -16,7 +13,7 @@ import {
   Cpu, 
   GitFork, 
   TrendingUp, 
-  GanttChartSquare,
+  FileText,
   AlertTriangle,
   Lightbulb
 } from 'lucide-react';
@@ -354,7 +351,7 @@ CREATE TABLE tasks (
 
               {/* Decision Ledger */}
               <div className="glass-panel p-6 rounded-lg">
-                <h3 className="text-md font-bold mb-4 text-white flex items-center gap-1.5"><GanttChartSquare className="w-5 h-5 text-accentPrimary" /> Architecture Decision Ledger</h3>
+                <h3 className="text-md font-bold mb-4 text-white flex items-center gap-1.5"><FileText className="w-5 h-5 text-accentPrimary" /> Architecture Decision Ledger</h3>
                 <div className="border border-white/5 rounded overflow-hidden">
                   <table className="w-full text-left text-sm text-slate-300">
                     <thead className="bg-white/5 text-xs font-mono uppercase text-slate-400 border-b border-white/5">
